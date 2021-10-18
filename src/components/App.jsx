@@ -11,16 +11,9 @@ function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [inputText, setInputText] = useState("1");
-
-  function handleLink(event) {
-    const newValue = event.target.value;
-    setInputText(newValue);
-    event.preventDefault();
-  }
 
   useEffect(() => {
-    axios('https://rcslabs.ru/ttrp' + inputText + '.json')
+    axios("https://rcslabs.ru/ttrp2.json")
       .then((response) => {
         setData(response.data);
       })
@@ -31,7 +24,7 @@ function App() {
       .finally(() => {
         setLoading(false);
       });
-  }, [inputText]);
+  }, []);
   if (loading) return "Loading...";
   if (error) return "Error!";
 
@@ -54,10 +47,6 @@ function App() {
   return (
     <main>
       <div className="container">
-      <form>
-        <input onChange={handleLink} name="Link" placeholder="Place Your Link" />
-        <button>Submit</button>
-      </form>
         <div className="card">
           <div className="header">
             <p>Количество пройденных тестов {title}</p>

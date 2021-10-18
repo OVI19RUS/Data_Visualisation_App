@@ -5,24 +5,31 @@ function BarGraph(props) {
 let frontHeight = props.front + "px";
 let backHeight = props.back + "px";
 let dbHeight = props.db + "px";
+let frontMargin = props.back + props.db + "px";
 
 if (props.front > 100){
-  frontHeight = ((props.front) * 0.00011) +'px';
+  frontHeight = ((props.front) * 0.000113) +'px';
 } 
 if ((props.back) > 100){
-  backHeight = ((props.back) * 0.00011) +'px';
+  backHeight = ((props.back) * 0.000113) +'px';
 }
 if (props.db > 100) {
-  dbHeight = (props.db * 0.00011) + 'px';
+  dbHeight = (props.db * 0.000113) + 'px';
+}
+if ((props.back && props.db) > 100){
+  frontMargin = (props.back + props.db) * 0.000113 + "px";
 }
 if (props.front < 30){
-  frontHeight = ((props.front) * 3) +'px';
+  frontHeight = ((props.front) * 6) +'px';
 } 
 if ((props.back) < 30){
-  backHeight = ((props.back) * 3) +'px';
+  backHeight = ((props.back) * 6) +'px';
 }
 if (props.db < 30) {
-  dbHeight = (props.db * 3) + 'px';
+  dbHeight = (props.db * 6) + 'px';
+}
+if ((props.back && props.db) < 30){
+  frontMargin = ((props.back + props.db) * 6) + "px";
 }
 
   return (
@@ -30,7 +37,7 @@ if (props.db < 30) {
       <div>
         <li
           className="front"
-          style={{ height: frontHeight, lineHeight: frontHeight}}
+          style={{ height: frontHeight, lineHeight: frontHeight, marginBottom: frontMargin}}
         >
           {props.front}
         </li>
@@ -38,7 +45,7 @@ if (props.db < 30) {
       <div>
         <li
           className="back"
-          style={{ height: backHeight, lineHeight: backHeight }}
+          style={{ height: backHeight, lineHeight: backHeight,  marginBottom: dbHeight }}
         >
           {props.back}
         </li>
